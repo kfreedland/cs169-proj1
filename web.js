@@ -5,28 +5,28 @@ var app = express.createServer(express.logger());
 var pg = require('pg');
 
 
-// app.get('/', function(request, response) {
-//   response.send('Hello World!');
-// });
+app.get('/', function(request, response) {
+  response.send('Hello World!');
+});
 
 app.post('/users/login', function(request, response){
 	pg.connect(process.env.DATABASE_URL, function(err, client) {
-	var query = client.query('SELECT count FROM users u WHERE u.password = '+request.password +' and u.name = '+request.user);
-	var returnDict = {};
-	query.on('row', function(result)
-	{
-		if(!result)
+		var query = client.query('SELECT count FROM users u WHERE u.password = '+request.password +' and u.name = '+request.user);
+		var returnDict = {};
+		query.on('row', function(result)
 		{
-			returnDict = {"errCode":-1};
-		}
-		else
-		{
-			returnDict = {"errCode":1,"count":result};
-		}	
+			if(!result)
+			{
+				returnDict = {"errCode":-1};
+			}
+			else
+			{
+				returnDict = {"errCode":1,"count":result};
+			}	
+		});
+		response.send(returnDict);
 	});
-	response.send(returnDict);
 });
-
 // app.post('/users/add', function(request, response){
 // });
 
@@ -49,4 +49,3 @@ pg.connect(process.env.DATABASE_URL, function(err, client) {
   query.on('row', function(row) {
     console.log(JSON.stringify(row));
   });*/
-});
