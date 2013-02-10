@@ -21,6 +21,7 @@ app.get('/user', function(request, response){
 
 app.post('/users/login', function(request, response){
 	console.log(request.body);
+	console.log(request.body.user);
 	var word = "";
 	request.addListener("data", function(data){
 		word += data;
