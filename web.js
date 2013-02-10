@@ -29,7 +29,7 @@ app.post('/users/login', function(request, response){
 		var data = word;
 
 		response.send("data is: " + data);
-		response.send(JSON.parse(data));
+		response.send("json parse"+JSON.parse(data));
 		pg.connect(process.env.DATABASE_URL, function(err, client) {
 			response.send(data.password);
 			var query = client.query('SELECT count FROM users u WHERE u.password = ' + data.password + ' and u.name = ' + data.user);
