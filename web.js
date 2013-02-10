@@ -21,7 +21,7 @@ app.post('/users/login', function(request, response){
 			}
 			else
 			{
-				returnDict = {"errCode":1,"count":result};
+				returnDict = {"errCode":1, "count":result};
 			}	
 		});
 		response.send(returnDict);
