@@ -10,9 +10,20 @@ app.get('/', function(request, response) {
 });
 
 app.post('/users/login', function(request, response){
-	response.send("JSON.stringify(request)");
 	pg.connect(process.env.DATABASE_URL, function(err, client) {
-	var query = client.query('SELECT * FROM Users u WHERE u.password = '+request[password])+' and u.name = '+request[name];
+	var query = client.query('SELECT count FROM Users u WHERE u.password = '+request.password)+' and u.name = '+request.user;
+	query.on('row', function(result){
+		var returnDict = {};
+		if(result==null)
+		{
+			returnDict = {"errCode":-1};
+		}
+		else
+		{
+			returnDict = {"errCode":1,"count":result};
+		}	
+	}
+	response.send(returnDict);
 	});
 });
 
