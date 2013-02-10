@@ -21,6 +21,7 @@ app.get('/user', function(request, response){
 
 app.post('/users/login', function(request, response){
 	request.addListener("data", function(data){
+		data = JSON.parse(data);
 		response.send("data is: "+data);
 		pg.connect(process.env.DATABASE_URL, function(err, client) {
 			response.send(data.password);
