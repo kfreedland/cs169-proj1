@@ -1,1 +1,1 @@
-web: geddy -p 4000
+web: geddy -e $NODE_ENV
