@@ -5,9 +5,9 @@ var app = express.createServer(express.logger());
 var pg = require('pg');
 
 
-app.get('/', function(request, response) {
-  response.send('Hello World!');
-});
+// app.get('/', function(request, response) {
+//   response.send('Hello World!');
+// });
 
 app.post('/users/login', function(request, response){
 	pg.connect(process.env.DATABASE_URL, function(err, client) {
@@ -27,14 +27,14 @@ app.post('/users/login', function(request, response){
 	response.send(returnDict);
 });
 
-app.post('/users/add', function(request, response){
-});
+// app.post('/users/add', function(request, response){
+// });
 
-app.post('/TESTAPI/resetFixture', function(request, response){
-});
+// app.post('/TESTAPI/resetFixture', function(request, response){
+// });
 
-app.post('/TESTAPI/unitTests', function(request, response){
-});
+// app.post('/TESTAPI/unitTests', function(request, response){
+// });
 
 var port = process.env.PORT || 5000;
 app.listen(port, function() {
