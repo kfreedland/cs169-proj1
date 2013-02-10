@@ -1,7 +1,7 @@
 var express = require('express');
 
 var app = express.createServer(express.logger());
-
+app.use(express.bodyParser());
 var pg = require('pg');
 
 
@@ -20,6 +20,7 @@ app.get('/user', function(request, response){
 });
 
 app.post('/users/login', function(request, response){
+	console.log(request.body);
 	var word = "";
 	request.addListener("data", function(data){
 		word += data;
