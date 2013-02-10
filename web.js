@@ -21,11 +21,7 @@ app.get('/user', function(request, response){
 
 app.post('/users/login', function(request, response){
 	pg.connect(process.env.DATABASE_URL, function(err, client) {
-		if(!request)
-		{
-			response.send("ERROR")
-		}
-		response.send("request\n"+request.method);
+		response.send("request\n"+request.headers);
 		var query = client.query('SELECT count FROM users u WHERE u.password = ' + request.password + ' and u.name = ' + request.user);
 		var returnDict = {};
 		query.on('row', function(result)
