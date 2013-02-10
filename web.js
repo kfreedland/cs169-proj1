@@ -20,14 +20,15 @@ app.get('/user', function(request, response){
 });
 
 app.post('/users/login', function(request, response){
-	word = "";
+	var word = "";
 	request.addListener("data", function(data){
 		word += data;
 	});
 	request.addListener("end", function(){
-		data = word;
+		var data = word;
+
 		response.send("data is: " + data);
-		response.send(data.split(','));
+		response.send(JSON.parse(data);
 		pg.connect(process.env.DATABASE_URL, function(err, client) {
 			response.send(data.password);
 			var query = client.query('SELECT count FROM users u WHERE u.password = ' + data.password + ' and u.name = ' + data.user);
