@@ -23,7 +23,7 @@ var config = {
 , model: {
     defaultAdapter: 'mongo'
   }
-, db: {
+/*, db: {
     mongo: {
       username: null
     , dbname: 'production'
@@ -32,9 +32,9 @@ var config = {
     , host: 'localhost'
     , port: 27017
     }
-  }
+  }*/
 
-/* // Using Postgres as the default, with only a Postgres DB
+ // Using Postgres as the default, with only a Postgres DB
 , model: {
     defaultAdapter: 'postgres'
   }
@@ -47,7 +47,7 @@ var config = {
     , port: 5432
     }
   }
-*/
+
 
 /* // Using Postgres as the default, with both Postgres and Riak
 , model: {
