@@ -10,7 +10,7 @@ app.get('/', function(request, response) {
 });
 
 app.post('/users/login', function(request, response){
-	response.send(JSON.stringify(request));
+	response.send("JSON.stringify(request)");
 	pg.connect(process.env.DATABASE_URL, function(err, client) {
 	var query = client.query('SELECT * FROM Users u WHERE u.password = '+request[password])+' and u.name = '+request[name];
 	});
