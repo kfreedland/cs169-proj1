@@ -19,7 +19,7 @@ app.post('/users/login', function(request, response){
 	});
 });
 
-app.post('/users/login', function(request, response){
+app.get('/users', function(request, response){
 	pg.connect(process.env.DATABASE_URL, function(err, client) {
 		var query = client.query('SELECT count FROM users u WHERE u.password = ' + request.password + ' and u.name = ' + request.user);
 		var returnDict = {};
