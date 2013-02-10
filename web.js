@@ -21,34 +21,26 @@ app.get('/user', function(request, response){
 
 app.post('/users/login', function(request, response){
 	console.log(request.body);
-	console.log(request.body.user);
-	var word = "";
-	request.addListener("data", function(data){
-		word += data;
-	});
-	request.addListener("end", function(){
-		var data = word;
 
-		response.send("data is: " + data);
-		response.send("json parse"+JSON.parse(data));
-		pg.connect(process.env.DATABASE_URL, function(err, client) {
-			response.send(data.password);
-			var query = client.query('SELECT count FROM users u WHERE u.password = ' + data.password + ' and u.name = ' + data.user);
-			var returnDict = {};
-			query.on('row', function(result)
+	var data = request.body;
+	response.send("json parse"+JSON.parse(data));
+	pg.connect(process.env.DATABASE_URL, function(err, client) {
+		response.send(data.password);
+		var query = client.query('SELECT count FROM users u WHERE u.password = ' + data.password + ' and u.name = ' + data.user);
+		var returnDict = {};
+		query.on('row', function(result)
+		{
+			//response.send("test\n"+console.dir(result));
+			if(!result)
 			{
-				//response.send("test\n"+console.dir(result));
-				if(!result)
-				{
-					returnDict = {"errCode":-1};
-				}
-				else
-				{
-					returnDict = {"errCode":1, "count":result};
-				}	
-			});
-			response.send(returnDict);
+				returnDict = {"errCode":-1};
+			}
+			else
+			{
+				returnDict = {"errCode":1, "count":result};
+			}	
 		});
+		response.send(returnDict);
 	});
 });
 // app.post('/users/add', function(request, response){
