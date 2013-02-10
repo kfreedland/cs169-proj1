@@ -3,15 +3,18 @@ var express = require('express');
 var app = express.createServer(express.logger());
 
 var pg = require('pg');
+
+
 app.get('/', function(request, response) {
   response.send('Hello World!');
 });
 
 app.post('/users/login', function(request, response){
-	var pg = require('pg');
 	console.log(JSON.stringify(request));
-	//var query = client.query('SELECT * FROM Users u WHERE u.password == request.password');
-	//pg.connect(process.env.DATABASE_URL, function(err, client) {
+	pg.connect(process.env.DATABASE_URL, function(err, client) {
+	var query = client.query('SELECT * FROM Users u WHERE u.password = '+request[password])+" and u.name = "+request[name];
+	console.log(JSON.stringify(query));
+	});
 });
 
 app.post('/users/add', function(request, response){
