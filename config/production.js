@@ -20,10 +20,10 @@ var config = {
   detailedErrors: false
 , hostname: null
 , port: 4000
-, model: {
+/*, model: {
     defaultAdapter: 'mongo'
   }
-/*, db: {
+, db: {
     mongo: {
       username: null
     , dbname: 'production'
