@@ -19,7 +19,7 @@
 var config = {
   detailedErrors: true
 , debug: true
-, hostname: 'localhost'
+, hostname: 'http://guarded-spire-9324.herokuapp.com/'
 , port: 4000
 , model: {
     defaultAdapter: 'memory'
