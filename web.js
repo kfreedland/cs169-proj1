@@ -25,7 +25,7 @@ app.post('/users/login', function(request, response){
 		{
 			response.send("ERROR")
 		}
-		response.send("request\n"+console.dir(request));
+		response.send("request\n"+request.method);
 		var query = client.query('SELECT count FROM users u WHERE u.password = ' + request.password + ' and u.name = ' + request.user);
 		var returnDict = {};
 		query.on('row', function(result)
