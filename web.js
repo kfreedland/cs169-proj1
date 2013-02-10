@@ -25,6 +25,7 @@ app.post('/users/login', function(request, response){
 		var returnDict = {};
 		query.on('row', function(result)
 		{
+			response.send(result);
 			if(!result)
 			{
 				returnDict = {"errCode":-1};
