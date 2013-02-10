@@ -1,1 +1,1 @@
-web: node web.js
+web: geddy -p 4000

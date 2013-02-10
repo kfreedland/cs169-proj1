@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "dependencies": {
     "express": "2.5.x",
-    "pg": "0.6.15"
+    "pg": "0.6.15",
+    "geddy": "0.6.18",
+    "jake": "0.5.8"
   },
   "engines": {
     "node": "0.8.x",
