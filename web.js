@@ -21,12 +21,12 @@ app.get('/user', function(request, response){
 
 app.post('/users/login', function(request, response){
 	pg.connect(process.env.DATABASE_URL, function(err, client) {
-		response.send("request\n"+JSON.stringify(request));
+		response.send("request\n"+console.dir(request));
 		var query = client.query('SELECT count FROM users u WHERE u.password = ' + request.password + ' and u.name = ' + request.user);
 		var returnDict = {};
 		query.on('row', function(result)
 		{
-			response.send("test\n"+result);
+			response.send("test\n"+console.dir(result));
 			if(!result)
 			{
 				returnDict = {"errCode":-1};
