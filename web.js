@@ -20,7 +20,7 @@ app.get('/user', function(request, response){
 });
 
 app.post('/users/login', function(request, response){
-	console.log(request.body);
+	console.log("body"+request.body);
 
 	var data = request.body;
 	pg.connect(process.env.DATABASE_URL, function(err, client) {
