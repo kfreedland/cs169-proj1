@@ -20,7 +20,7 @@ tests = {
 	    	assert.equal(responseDict, {'errCode': 1, 'count': 1});
 	    
   		});
-    }
+    },
 
     'addUserB': function ()
     {
