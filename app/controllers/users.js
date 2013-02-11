@@ -12,7 +12,7 @@ var Users = function () {
   this.add = function (req, resp, params) {
     var self = this;
     params.id = params.id || geddy.string.uuid(10);
-    console.log("params: "+params.user);
+    console.log("params: "+params);
     geddy.model.User.add(params.user, params.password, function(responseDict)
     {
       if(responseDict)
