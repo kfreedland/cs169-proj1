@@ -12,7 +12,7 @@ for (var i = 0; i < 129; i++)
 
 tests = {
   'addTwoUsers': function () 
-	{
+    {
     	User.add('aUser','aPassword', function (responseDict)
 		{
 			//SUCCESS
