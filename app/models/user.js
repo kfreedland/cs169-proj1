@@ -103,7 +103,7 @@ User.rersetFixture = function resetFixture (callback)
     }
     //SUCCESS
     responseDict.errCode = 1;
-  };
+  });
 }
 
 User.unitTests = function TESTAPI_unitTests(callback)
