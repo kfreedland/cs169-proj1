@@ -91,6 +91,21 @@ User.add = function add (uname, pword, callback)
   }
 };
 
+User.rersetFixture = function resetFixture (callback)
+{
+  var responseDict={};
+  geddy.model.User.all(function(records)
+  {
+    for (record in records)
+    {
+      console.log("rec is: "+record);
+      geddy.model.User.remove(record);
+    }
+    //SUCCESS
+    responseDict.errCode = 1;
+  };
+}
+
 User.TESTAPI_unitTests = function TESTAPI_unitTests(callback)
 {
   var responseDict = {};

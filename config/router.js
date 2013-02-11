@@ -22,6 +22,7 @@ var router = new geddy.RegExpRouter();
 router.get('/').to('Main.index');
 router.post('/users/add').to('users.add');
 router.post('/TESTAPI/unitTests').to('users.unitTests');
+router.post('/TESTAPI/resetFixture').to('users.resetFixture');
 // Basic routes
 // router.match('/moving/pictures/:id', 'GET').to('Moving.pictures');
 //

@@ -26,7 +26,16 @@ var Users = function () {
     });
   };
 
-  this.unitTests= function (req, resp, param)
+  this.resetFixture = function (req, resp, params)
+  {
+    var self = this;
+    geddy.model.User.resetFixture(function(responseDict)
+    {
+      self.respond(responseDict);
+    });
+  }
+  
+  this.unitTests = function (req, resp, params)
   {
     var self = this;
     geddy.model.User.TESTAPI_unitTests(function(responseDict)
