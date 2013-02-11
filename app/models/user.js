@@ -119,6 +119,7 @@ User.unitTests = function TESTAPI_unitTests(callback)
     }
     catch (e)
     {
+      console.log("EXCEPTION: "+ e);
       console.log("FAILED TEST: " + test);
       failed+=1;
     }

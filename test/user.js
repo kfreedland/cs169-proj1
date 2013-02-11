@@ -44,6 +44,7 @@ tests = {
     	User.add(null, 'shouldnt matter', function (responseDict)
     	{
     		//ERR_BAD_USERNAME
+            console.log(responseDict.toString());
     		assert.equal(responseDict, {'errCode': -3});
     	});
 
