@@ -94,7 +94,7 @@ User.add = function add (uname, pword, callback)
 User.TESTAPI_unitTests = function TESTAPI_unitTests(callback)
 {
   var responseDict = {};
-  var tests = require('./test/user.js');
+  var tests = require('../../test/user.js');
   var failed = 0;
   var passed = 0;
   for (test in tests)
