@@ -93,6 +93,7 @@ User.add = function add (uname, pword, callback)
 
 User.resetFixture = function resetFixture (callback)
 {
+  console.log("resettingFixture");
   var responseDict={};
   geddy.model.User.all(function(records)
   {
