@@ -17,7 +17,7 @@ tests = {
     	User.add('aUser','aPassword', function (responseDict)
 		{
 			//SUCCESS
-	    	assert.equal(responseDict, {'errCode': 1, 'count': 1});
+	    	assert.deepEqual(responseDict, {'errCode': 1, 'count': 1});
 	    
   		});
     },
@@ -28,7 +28,7 @@ tests = {
   		User.add('bUser','bPassword', function (responseDict)
 		{
 			//SUCCESS
-	    	assert.equal(responseDict, {'errCode':1, 'count': 1});
+	    	assert.deepEqual(responseDict, {'errCode':1, 'count': 1});
 	    
   		});
     }
