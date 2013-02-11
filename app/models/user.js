@@ -114,11 +114,12 @@ User.unitTests = function TESTAPI_unitTests(callback)
   var tests = require('../../test/user.js');
   var failed = 0;
   var passed = 0;
-  for (test in tests)
+  for (var test in tests)
   {
     try
     {
-      test();
+      console.log("running test" + test);
+      tests[test]();
       passed+=1;
     }
     catch (e)
