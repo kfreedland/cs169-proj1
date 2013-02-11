@@ -109,6 +109,7 @@ User.unitTests = function TESTAPI_unitTests(callback)
   var tests = require('../../test/user.js');
   var failed = 0;
   var passed = 0;
+  responseDict.output=""
   for (var test in tests)
   {
     try
@@ -119,6 +120,7 @@ User.unitTests = function TESTAPI_unitTests(callback)
     }
     catch (e)
     {
+      responseDict.output+="Test: "+test+"Error: "+e+"\n"
       console.log("EXCEPTION: "+ e);
       console.log("FAILED TEST: " + test);
       failed+=1;
