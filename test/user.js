@@ -13,6 +13,7 @@ for (var i = 0; i < 129; i++)
 tests = {
   'addTwoUsers': function () 
     {
+        console.log("adding first user");
     	User.add('aUser','aPassword', function (responseDict)
 		{
 			//SUCCESS
@@ -20,6 +21,7 @@ tests = {
 	    
   		});
 
+        console.log("adding second user");
   		User.add('bUser','bPassword', function (responseDict)
 		{
 			//SUCCESS
@@ -44,7 +46,6 @@ tests = {
     	User.add(null, 'shouldnt matter', function (responseDict)
     	{
     		//ERR_BAD_USERNAME
-            console.log(responseDict.toString());
     		assert.equal(responseDict, {'errCode': -3});
     	});
 
