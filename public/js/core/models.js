@@ -57,17 +57,18 @@ User.add = function add (uname, pword, callback)
     {
       //ERR_BAD_PASSWORD
       responseDict.errCode = -4;
-      callback(answerDict);
+      callback(responseDict);
     }
     else
     {
-      var userRecord = geddy.model.User.load({user: uname, password: pword, count: 0});
+      console.log(uname+" "+pword);
+      var userRecord = geddy.model.User.create({name: uname, password: pword, logins: 0});
       console.log("record created: "+userRecord);
       geddy.model.User.save(userRecord, function (err, results)
       {
         console.log("GOOD");
-        answerDict.errCode = 1; //"SUCCESS"
-        callback(answerDict);
+        responseDict.errCode = 1; //"SUCCESS"
+        callback(responseDict);
       });
     }
   }
