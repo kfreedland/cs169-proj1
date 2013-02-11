@@ -1,5 +1,5 @@
 var Users = function () {
-  this.respondsWith = ['html', 'json', 'xml', 'js', 'txt'];
+  this.respondsWith = ['json'];
 
   this.index = function (req, resp, params) {
     var self = this;
@@ -17,14 +17,13 @@ var Users = function () {
     {
       if(responseDict)
       {  
-        this.respond(responseDict);
+        self.respond(responseDict);
       }
       else
       {
-        this.respond("THIS IS BAD");
+        self.respond("THIS IS BAD");
       }
     });
-    this.respond({params: params});
   };
 
   this.create = function (req, resp, params) {

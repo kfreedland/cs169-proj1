@@ -61,14 +61,30 @@ User.add = function add (uname, pword, callback)
     }
     else
     {
-      console.log(uname+" "+pword);
-      var userRecord = geddy.model.User.create({name: uname, password: pword, logins: 0});
-      console.log("record created: "+userRecord);
-      geddy.model.User.save(userRecord, function (err, results)
+      console.log('sup\n');
+
+      geddy.model.User.load({name: uname}, function (err, result)
       {
-        console.log("GOOD");
-        responseDict.errCode = 1; //"SUCCESS"
-        callback(responseDict);
+        console.log('error\n');
+        if(result)
+        {
+          //ERR_USER_EXISTS
+          responseDict.errCode = -2;
+          callback(responseDict);
+        }
+        else
+        {
+          console.log("so far so good\n");
+          console.log(uname+" "+pword);
+          var userRecord = geddy.model.User.create({name: uname, password: pword, logins: 0});
+          console.log("record created: "+userRecord);
+          geddy.model.User.save(userRecord, function (err, results)
+          {
+            console.log("GOOD");
+            responseDict.errCode = 1; //"SUCCESS"
+            callback(responseDict);
+          });
+        }
       });
     }
   }
