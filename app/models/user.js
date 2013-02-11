@@ -97,10 +97,9 @@ User.resetFixture = function resetFixture (callback)
   var responseDict={};
   geddy.model.User.all(function (err, records)
   {
-    console.log(records);
+    console.log("records: " + records);
     for (var key in records)
     {
-      console.log("rec is: "+record);
       geddy.model.User.remove(records[key].id);
     }
     //SUCCESS
