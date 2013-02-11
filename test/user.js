@@ -11,7 +11,7 @@ for (var i = 0; i < 129; i++)
 }
 
 tests = {
-  'addTwoUsers': function () 
+  'addUserA': function () 
     {
         console.log("adding first user");
     	User.add('aUser','aPassword', function (responseDict)
@@ -20,7 +20,10 @@ tests = {
 	    	assert.equal(responseDict, {'errCode': 1, 'count': 1});
 	    
   		});
+    }
 
+    'addUserB': function ()
+    {
         console.log("adding second user");
   		User.add('bUser','bPassword', function (responseDict)
 		{
