@@ -2,8 +2,7 @@
   "name": "node-example",
   "version": "0.0.1",
   "dependencies": {
-    "express": "2.5.x",
-    "pg": "0.6.15",
+    "pg": "0.12.3",
     "geddy": "0.6.18",
     "jake": "0.5.8"
   },
