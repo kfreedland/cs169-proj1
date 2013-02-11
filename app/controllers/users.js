@@ -26,6 +26,15 @@ var Users = function () {
     });
   };
 
+  this.unitTests= function (req, resp, param)
+  {
+    var self = this;
+    geddy.model.User.TESTAPI_unitTests(function(responseDict)
+    {
+      self.respond(responseDict);
+    });
+  };
+
   this.create = function (req, resp, params) {
     params.id = params.id || geddy.string.uuid(10);
 
