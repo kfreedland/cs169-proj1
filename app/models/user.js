@@ -106,7 +106,7 @@ User.rersetFixture = function resetFixture (callback)
   };
 }
 
-User.TESTAPI_unitTests = function TESTAPI_unitTests(callback)
+User.unitTests = function TESTAPI_unitTests(callback)
 {
   var responseDict = {};
   var tests = require('../../test/user.js');

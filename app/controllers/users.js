@@ -34,11 +34,11 @@ var Users = function () {
       self.respond(responseDict);
     });
   }
-  
+
   this.unitTests = function (req, resp, params)
   {
     var self = this;
-    geddy.model.User.TESTAPI_unitTests(function(responseDict)
+    geddy.model.User.unitTests(function(responseDict)
     {
       self.respond(responseDict);
     });
