@@ -47,6 +47,7 @@ User.add = function add (uname, pword, callback)
   if(!uname || uname == "" || uname.length > 128)
   {
     //ERR_BAD_USERNAME
+    console.log("ERR_BAD_USERNAME");
     responseDict.errCode = -3;
     callback(responseDict);
   }
