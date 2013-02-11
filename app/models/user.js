@@ -128,11 +128,7 @@ User.unitTests = function TESTAPI_unitTests(callback)
   }
   responseDict.totalTests = failed+passed;
   responseDict.nrFailed = failed;
-  if(failed > 0)
-  {
-    responseDict.output = "you failed stuff";
-  }
-  else
+  if(failed ,<= 0)
   {
     responseDict.output = "all good";
   }
