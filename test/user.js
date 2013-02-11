@@ -89,7 +89,7 @@ tests = {
     		//ERR_BAD_PASSWORD
     		assert.deepEqual(responseDict, {'errCode': -4});
     	});
-	}
+	},
 
     'deleteAll' : function ()
     {
