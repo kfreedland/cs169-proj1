@@ -77,12 +77,13 @@ User.add = function add (uname, pword, callback)
         {
           console.log("so far so good\n");
           console.log(uname+" "+pword);
-          var userRecord = geddy.model.User.create({name: uname, password: pword, logins: 0});
+          var userRecord = geddy.model.User.create({name: uname, password: pword, logins: 1});
           console.log("record created: "+userRecord);
           geddy.model.User.save(userRecord, function (err, results)
           {
             console.log("GOOD");
             responseDict.errCode = 1; //"SUCCESS"
+            responseDict.count = 1;
             callback(responseDict);
           });
         }

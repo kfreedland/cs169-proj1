@@ -76,18 +76,50 @@ User.add = function add (uname, pword, callback)
         {
           console.log("so far so good\n");
           console.log(uname+" "+pword);
-          var userRecord = geddy.model.User.create({name: uname, password: pword, logins: 0});
+          var userRecord = geddy.model.User.create({name: uname, password: pword, logins: 1});
           console.log("record created: "+userRecord);
           geddy.model.User.save(userRecord, function (err, results)
           {
             console.log("GOOD");
             responseDict.errCode = 1; //"SUCCESS"
+            responseDict.count = 1;
             callback(responseDict);
           });
         }
       });
     }
   }
+};
+
+User.TESTAPI_unitTests = function TESTAPI_unitTests(callback)
+{
+  var responseDict = {};
+  var tests = require('./test/user.js');
+  var failed = 0;
+  var passed = 0;
+  for (test in tests)
+  {
+    try
+    {
+      test();
+      passed+=1;
+    }
+    catch (e)
+    {
+      failed+=1;
+    }
+  }
+  responseDict.totalTests = failed+passed;
+  responseDict.nrFailed = failed;
+  if(failed > 0)
+  {
+    responseDict.output = "you failed stuff";
+  }
+  else
+  {
+    responseDict.output = "all good";
+  }
+  callback(responseDict);
 };
 
 User = geddy.model.register('User', User);
