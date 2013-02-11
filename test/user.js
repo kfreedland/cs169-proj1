@@ -26,7 +26,7 @@ tests = {
 	    	assert.equal(responseDict, {'errCode':1});
 	    
   		});
-    }
+    },
 
     'addExistingUser': function ()
     {
@@ -36,7 +36,7 @@ tests = {
     		//ERR_USER_EXISTS
     		assert.equal(responseDict, {'errCode':-2});
     	});
-    }
+    },
 
     'addInvalidUName': function ()
     {
@@ -57,7 +57,7 @@ tests = {
     		//ERR_BAD_USERNAME
     		assert.equal(responseDict, {'errCode': -3});
     	});
-    }
+    },
 
     'addInvalidPword' : function ()
     {
