@@ -35,12 +35,14 @@ tests = {
 
     'addExistingUser': function ()
     {
-
-    	User.add('aUser','aPassword', function (responseDict)
-    	{
-    		//ERR_USER_EXISTS
-    		assert.equal(responseDict, {'errCode':-2});
-    	});
+        User.add('cUser','cPassword', function (responseDict1)
+        {
+            User.add('cUser','cPassword', function (responseDict)
+            {
+                //ERR_USER_EXISTS
+                assert.equal(responseDict, {'errCode':-2});
+            });
+        }
     },
 
     'addInvalidUName': function ()
