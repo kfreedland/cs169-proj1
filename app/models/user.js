@@ -61,11 +61,9 @@ User.add = function add (uname, pword, callback)
     }
     else
     {
-      console.log('sup\n');
 
       geddy.model.User.load({name: uname}, function (err, result)
       {
-        console.log('error\n');
         if(result)
         {
           //ERR_USER_EXISTS
@@ -74,13 +72,10 @@ User.add = function add (uname, pword, callback)
         }
         else
         {
-          console.log("so far so good\n");
-          console.log(uname+" "+pword);
           var userRecord = geddy.model.User.create({name: uname, password: pword, logins: 1});
           console.log("record created: "+userRecord);
           geddy.model.User.save(userRecord, function (err, results)
           {
-            console.log("GOOD");
             responseDict.errCode = 1; //"SUCCESS"
             responseDict.count = 1;
             callback(responseDict);
@@ -124,6 +119,7 @@ User.unitTests = function TESTAPI_unitTests(callback)
     }
     catch (e)
     {
+      console.log("FAILED TEST: " + test);
       failed+=1;
     }
   }
