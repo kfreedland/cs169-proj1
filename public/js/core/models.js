@@ -42,7 +42,36 @@ User.someStaticMethod = function () {
 };
 User.someStaticProperty = 'YYZ';
 */
+User.add = function add (uname, pword, callback)
+{
+  var responseDict={};
+  if(!uname || uname == "" || uname.length > 128)
+  {
+    //ERR_BAD_USERNAME
+    responseDict.errCode = -3;
+    callback(responseDict);
+  }
+  else 
+  {
+    if(!pword || pword == "" || pword > 128)
+    {
+      //ERR_BAD_PASSWORD
+      responseDict.errCode = -4;
+      callback(answerDict);
+    }
+    else
+    {
+      var userRecord = geddy.model.User.load({user: uname, password: pword, count: 0});
+      console.log("record created: "+userRecord);
+      geddy.model.User.save(userRecord, function (err, results)
+      {
+        console.log("GOOD");
+        answerDict.errCode = 1; //"SUCCESS"
+        callback(answerDict);
+      });
+    }
+  }
+};
 
 User = geddy.model.register('User', User);
-
-}());
+exports.User = User;}());

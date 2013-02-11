@@ -10,6 +10,19 @@ var Users = function () {
   };
 
   this.add = function (req, resp, params) {
+    params.id = params.id || geddy.string.uuid(10);
+
+    geddy.model.User.add(params.user, params.password, function(responseDict)
+    {
+      if(responseDict)
+      {  
+        self.respond(responseDict);
+      }
+      else
+      {
+        self.respond("THIS IS BAD");
+      }
+    });
     this.respond({params: params});
   };
 

@@ -50,25 +50,27 @@ User.add = function add (uname, pword, callback)
     responseDict.errCode = -3;
     callback(responseDict);
   }
-  else if(!pword || pword == "" || pword > 128)
+  else 
   {
-    //ERR_BAD_PASSWORD
-    responseDict.errCode = -4;
-    callback(answerDict);
-  }
-  else
-  {
-    var userRecord = geddy.model.User.load({user: uname, password: pword, count: 0});
-    console.log("record created: "+userRecord);
-    geddy.model.User.save(userRecord, function (err, results))
+    if(!pword || pword == "" || pword > 128)
     {
-      console.log("GOOD");
-      answerDict.errCode = 1; //"SUCCESS"
-      callback(answerDict)
-    };
+      //ERR_BAD_PASSWORD
+      responseDict.errCode = -4;
+      callback(answerDict);
+    }
+    else
+    {
+      var userRecord = geddy.model.User.load({user: uname, password: pword, count: 0});
+      console.log("record created: "+userRecord);
+      geddy.model.User.save(userRecord, function (err, results)
+      {
+        console.log("GOOD");
+        answerDict.errCode = 1; //"SUCCESS"
+        callback(answerDict);
+      });
+    }
   }
 };
 
-
 User = geddy.model.register('User', User);
-
+exports.User = User;
