@@ -98,10 +98,12 @@ User.login = function login (uname, pword, callback)
     }
     else
     {
-      result.count+=1;
+      var temp = result.count;
+      temp += 1;
+      result.logins = temp;
       geddy.model.User.save(result);
       responseDict.errCode = 1;
-      responseDict.errCode = result.count;
+      responseDict.count = result.logins;
       callback(responseDict);
     }
   });
