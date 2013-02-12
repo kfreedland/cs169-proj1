@@ -86,7 +86,7 @@ User.add = function add (uname, pword, callback)
   }
 };
 
-User.login = function login (uname, pword callback)
+User.login = function login (uname, pword, callback)
 {
   var responseDict = {};
   geddy.model.User.load({name: uname}, function (err, result)
