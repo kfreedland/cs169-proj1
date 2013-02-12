@@ -20,6 +20,7 @@ tests = {
 	    	assert.deepEqual(responseDict, {'errCode': 1, 'count': 1});
             User.resetFixture(function (responseDict)
             {
+                console.log("removing first user");
                 assert.deepEqual(responseDict, {'errCode': 1});
             });
 	           
