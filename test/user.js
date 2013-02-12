@@ -18,8 +18,13 @@ tests = {
 		{
 			//SUCCESS
 	    	assert.deepEqual(responseDict, {'errCode': 1, 'count': 1});
-	    
+            User.resetFixture(function (responseDict)
+            {
+                assert.deepEqual(responseDict, {'errCode': 1});
+            })
+	           
   		});
+        User.
     },
 
     'addUserB': function ()
