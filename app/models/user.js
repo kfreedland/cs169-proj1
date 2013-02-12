@@ -98,9 +98,7 @@ User.login = function login (uname, pword, callback)
     }
     else
     {
-      var temp = result.count;
-      temp += 1;
-      result.logins = temp;
+      result.logins += 1
       geddy.model.User.save(result);
       responseDict.errCode = 1;
       responseDict.count = result.logins;
