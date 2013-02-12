@@ -65,31 +65,31 @@ tests = {
                 });
             });
         });
+    },
+
+    'addInvalidUName': function ()
+    {
+        console.log("null Uname");
+    	User.add(null, 'shouldnt matter', function (responseDict)
+    	{
+    		//ERR_BAD_USERNAME
+    		assert.deepEqual(responseDict, {'errCode': -3});
+
+            console.log("empty Uname");
+            User.add('','shouldnt matter', function (responseDict)
+            {
+                //ERR_BAD_USERNAME
+                assert.deepEqual(responseDict, {'errCode':--3});
+
+                console.log("long Uname");
+                User.add(longUser, 'shouldnt matter', function (responseDict)
+                {
+                    //ERR_BAD_USERNAME
+                    assert.deepEqual(responseDict, {'errCode': -3});
+                });
+            });
+    	});
     }
-
- //    'addInvalidUName': function ()
- //    {
- //        console.log("null Uname");
- //    	User.add(null, 'shouldnt matter', function (responseDict)
- //    	{
- //    		//ERR_BAD_USERNAME
- //    		assert.deepEqual(responseDict, {'errCode': -3});
- //    	});
-
- //        console.log("empty Uname");
- //    	User.add('','shouldnt matter', function (responseDict)
- //    	{
- //    		//ERR_BAD_USERNAME
- //    		assert.deepEqual(responseDict, {'errCode':--3});
- //    	});
-
- //        console.log("long Uname");
- //    	User.add(longUser, 'shouldnt matter', function (responseDict)
- //    	{
- //    		//ERR_BAD_USERNAME
- //    		assert.deepEqual(responseDict, {'errCode': -3});
- //    	});
- //    },
 
  //    'addInvalidPword' : function ()
  //    {
