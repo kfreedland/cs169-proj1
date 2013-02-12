@@ -148,7 +148,6 @@ User.unitTests = function TESTAPI_unitTests(callback)
     }
     else 
     {
-      console.log(testArr+" "+count);
       var test = testArr[count];
       console.log("TESTING NEW TEST");
       try
