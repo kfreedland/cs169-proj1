@@ -161,12 +161,12 @@ User.unitTests = function TESTAPI_unitTests(callback)
     else 
     {
       var test = testArr[count];
-      console.log("TESTING NEW TEST");
       try
       {
         count++;
         test(run);
         passed+=1;
+        console.log("PASSED");
 
       }
       catch (e)
