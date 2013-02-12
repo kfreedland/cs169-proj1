@@ -150,20 +150,18 @@ User.unitTests = function TESTAPI_unitTests(callback)
     {
       console.log(testArr+" "+count);
       var test = testArr[count];
-      console.log("TEST IS: " + test);
+      console.log("TESTING NEW TEST");
       try
       {
         count++;
-        console.log("running test" + test);
         test(run);
         passed+=1;
 
       }
       catch (e)
       {
-        responseDict.output+="Test: "+test+"Error: "+e+"\n"
+        responseDict.output+="Error: "+e+"\n"
         console.log("EXCEPTION: "+ e);
-        console.log("FAILED TEST: " + test);
         failed+=1;
       }
       callback();
