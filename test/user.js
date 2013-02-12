@@ -21,7 +21,7 @@ tests = {
             User.resetFixture(function (responseDict)
             {
                 assert.deepEqual(responseDict, {'errCode': 1});
-            })
+            });
 	           
   		});
     },
