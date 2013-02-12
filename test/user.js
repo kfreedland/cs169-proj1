@@ -25,7 +25,7 @@ tests = {
             });
 	           
   		});
-    }
+    },
 
     'addUserAB': function ()
     {
