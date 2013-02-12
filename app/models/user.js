@@ -147,7 +147,7 @@ User.unitTests = function TESTAPI_unitTests(callback)
       responseDict.output = "all good";
     }
     responseDict.totalTests = failed + passed;
-    resposneDict.nrFailed = failed;
+    responseDict.nrFailed = failed;
     callback(responseDict);
   }
 
