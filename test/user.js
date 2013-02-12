@@ -21,10 +21,9 @@ tests = {
             User.resetFixture(function (responseDict)
             {
                 assert.deepEqual(responseDict, {'errCode': 1});
-            });
+            })
 	           
   		});
-        User.
     },
 
     'addUserB': function ()
