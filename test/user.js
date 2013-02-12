@@ -47,19 +47,25 @@ tests = {
                 });
             });
         });
-    }
+    },
 
- //    'addExistingUser': function ()
- //    {
- //        User.add('cUser','cPassword', function (responseDict1)
- //        {
- //            User.add('cUser','cPassword', function (responseDict)
- //            {
- //                //ERR_USER_EXISTS
- //                assert.equal(responseDict, {'errCode':-2});
- //            });
- //        });
- //    },
+    'addExistingUser': function ()
+    {
+        User.add('cUser','cPassword', function (responseDict1)
+        {
+            User.add('cUser','cPassword', function (responseDict)
+            {
+                //ERR_USER_EXISTS
+                assert.equal(responseDict, {'errCode':-2});
+
+                User.resetFixture(function (responseDict)
+                {
+                    console.log("removing first user");
+                    assert.deepEqual(responseDict, {'errCode': 1});
+                });
+            });
+        });
+    }
 
  //    'addInvalidUName': function ()
  //    {
