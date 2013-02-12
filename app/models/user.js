@@ -101,6 +101,7 @@ User.login = function login (uname, pword, callback)
       result.count+=1;
       geddy.model.user.save(result);
       resultDict.errCode = 1;
+      resultDict.errCode = result.count;
       callback(resultDict);
     }
   });
