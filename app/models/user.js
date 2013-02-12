@@ -140,7 +140,7 @@ User.unitTests = function TESTAPI_unitTests(callback)
     length++;
   }
 
-  function run (call)
+  var run = function run (call)
   {
     if (count == length)
     {
