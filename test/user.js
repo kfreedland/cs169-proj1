@@ -196,7 +196,7 @@ tests =
             User.add('cUser','cPassword', function (responseDict)
             {
                 //ERR_USER_EXISTS
-                assert.equal(responseDict, {'errCode':-2});
+                assert.deepEqual(responseDict, {'errCode':-2});
 
                 User.resetFixture(function (responseDict)
                 {

@@ -62,11 +62,9 @@ User.add = function add (uname, pword, callback)
     }
     else
     {
-      console.log('sup\n');
 
       geddy.model.User.load({name: uname}, function (err, result)
       {
-        console.log('error\n');
         if(result)
         {
           //ERR_USER_EXISTS
@@ -75,13 +73,10 @@ User.add = function add (uname, pword, callback)
         }
         else
         {
-          console.log("so far so good\n");
-          console.log(uname+" "+pword);
           var userRecord = geddy.model.User.create({name: uname, password: pword, logins: 1});
           console.log("record created: "+userRecord);
           geddy.model.User.save(userRecord, function (err, results)
           {
-            console.log("GOOD");
             responseDict.errCode = 1; //"SUCCESS"
             responseDict.count = 1;
             callback(responseDict);
@@ -90,6 +85,99 @@ User.add = function add (uname, pword, callback)
       });
     }
   }
+};
+
+User.login = function login (uname, pword, callback)
+{
+  var responseDict = {};
+  geddy.model.User.load({name: uname, password: pword}, function (err, result)
+  {
+    if(!result)
+    {
+      responseDict.errCode = -1;
+      callback(responseDict);
+    }
+    else
+    {
+      result.logins += 1
+      geddy.model.User.save(result);
+      responseDict.errCode = 1;
+      responseDict.count = result.logins;
+      callback(responseDict);
+    }
+  });
+}
+
+User.resetFixture = function resetFixture (callback)
+{
+  console.log("resettingFixture");
+  var responseDict={};
+  geddy.model.User.all(function (err, records)
+  {
+    console.log("records: " + records);
+    for (var key in records)
+    {
+      geddy.model.User.remove(records[key].id);
+    }
+    //SUCCESS
+    responseDict.errCode = 1;
+    callback(responseDict);
+  });
+}
+
+User.unitTests = function TESTAPI_unitTests(callback)
+{
+  var responseDict = {};
+  var tests = require('../../test/user.js');
+  var failed = 0;
+  var passed = 0;
+  responseDict.output=""
+  var count = 0;
+  var length = 0;
+  var testArr = new Array();
+  for (var i in tests)
+  {
+    testArr[length] = tests[i]; 
+    length++;
+  }
+
+  function run (call)
+  {
+    if (count == length)
+    {
+      call();
+    }
+    else 
+    {
+      var test = testArr[count];
+      console.log("TESTING NEW TEST");
+      try
+      {
+        count++;
+        test(run);
+        passed+=1;
+
+      }
+      catch (e)
+      {
+        responseDict.output+="Error: "+e+"\n"
+        console.log("EXCEPTION: "+ e);
+        failed+=1;
+      }
+      call();
+    }
+  }
+
+  function call()
+  {
+    if(failed == 0)
+    {
+      responseDict.output = "all good";
+    }
+    callback(responseDict);
+  }
+
+  run(call);
 };
 
 User = geddy.model.register('User', User);

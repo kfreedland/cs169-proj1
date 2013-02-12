@@ -163,7 +163,7 @@ User.unitTests = function TESTAPI_unitTests(callback)
         console.log("EXCEPTION: "+ e);
         failed+=1;
       }
-      callback();
+      call();
     }
   }
 
@@ -176,10 +176,7 @@ User.unitTests = function TESTAPI_unitTests(callback)
     callback(responseDict);
   }
 
-  run(callback)
-
-
-  callback(responseDict);
+  run(call);
 };
 
 User = geddy.model.register('User', User);
