@@ -27,16 +27,27 @@ tests = {
   		});
     }
 
- //    'addUserB': function ()
- //    {
- //        console.log("adding second user");
- //  		User.add('bUser','bPassword', function (responseDict)
-	// 	{
-	// 		//SUCCESS
-	//     	assert.deepEqual(responseDict, {'errCode':1, 'count': 1});
-	    
- //  		});
- //    },
+    'addUserAB': function ()
+    {
+        console.log("adding first user");
+        User.add('aUser','aPassword', function (responseDict)
+        {
+            //SUCCESS
+            assert.deepEqual(responseDict, {'errCode': 1, 'count': 1});
+            console.log("adding second user");
+  		    User.add('bUser','bPassword', function (responseDict)
+            {
+                //SUCCESS
+                assert.deepEqual(responseDict, {'errCode':1, 'count': 1});
+
+                User.resetFixture(function (responseDict)
+                {
+                    console.log("removing first user");
+                    assert.deepEqual(responseDict, {'errCode': 1});
+                });
+            });
+        });
+    }
 
  //    'addExistingUser': function ()
  //    {
