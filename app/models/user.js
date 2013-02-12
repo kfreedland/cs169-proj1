@@ -131,28 +131,53 @@ User.unitTests = function TESTAPI_unitTests(callback)
   var failed = 0;
   var passed = 0;
   responseDict.output=""
-  for (var test in tests)
+  var count = 0;
+  var length = 0;
+  for (var i in tests)
   {
-    try
+    length++;
+  }
+
+  function run (call)
+  {
+    if (count == length)
     {
-      console.log("running test" + test);
-      tests[test]();
-      passed+=1;
+      call();
     }
-    catch (e)
+    else 
     {
-      responseDict.output+="Test: "+test+"Error: "+e+"\n"
-      console.log("EXCEPTION: "+ e);
-      console.log("FAILED TEST: " + test);
-      failed+=1;
+      test = tests[count]
+      try
+      {
+        count++;
+        console.log("running test" + test);
+        tests[test](run);
+        passed+=1;
+
+      }
+      catch (e)
+      {
+        responseDict.output+="Test: "+test+"Error: "+e+"\n"
+        console.log("EXCEPTION: "+ e);
+        console.log("FAILED TEST: " + test);
+        failed+=1;
+      }
+      callback();
     }
   }
-  responseDict.totalTests = failed+passed;
-  responseDict.nrFailed = failed;
-  if(failed <= 0)
+
+  function call()
   {
-    responseDict.output = "all good";
+    if(failed == 0)
+    {
+      responseDict.output = "all good";
+    }
+    callback(responseDict);
   }
+
+  run(callback)
+
+
   callback(responseDict);
 };
 
