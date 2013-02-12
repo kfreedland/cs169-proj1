@@ -146,7 +146,8 @@ User.unitTests = function TESTAPI_unitTests(callback)
     }
     else 
     {
-      test = tests[count]
+      test = tests[count];
+      console.log("TEST IS: " + test);
       try
       {
         count++;
