@@ -9,6 +9,15 @@ var Users = function () {
     });
   };
 
+  this.login = function (req, resp, params)
+  {
+    var self = this;
+    geddy.model.User.login(params.user, params.password, function(responseDict)
+    {
+      self.respond(responseDict);
+    });
+  }
+
   this.add = function (req, resp, params) {
     var self = this;
     params.id = params.id || geddy.string.uuid(10);

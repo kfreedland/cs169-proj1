@@ -86,6 +86,26 @@ User.add = function add (uname, pword, callback)
   }
 };
 
+User.login = function login (uname, pword callback)
+{
+  var responseDict = {};
+  geddy.model.User.load({name: uname}, function (err, result)
+  {
+    if(!result)
+    {
+      responseDict.errCode = -1;
+      callback(resultDict);
+    }
+    else
+    {
+      result.count+=1;
+      geddy.model.user.save(result);
+      resultDict.errCode = 1;
+      callback(resultDict);
+    }
+  });
+}
+
 User.resetFixture = function resetFixture (callback)
 {
   console.log("resettingFixture");
