@@ -133,8 +133,10 @@ User.unitTests = function TESTAPI_unitTests(callback)
   responseDict.output=""
   var count = 0;
   var length = 0;
+  var testArr = new Array();
   for (var i in tests)
   {
+    testArr[length] = tests[i]; 
     length++;
   }
 
@@ -146,14 +148,14 @@ User.unitTests = function TESTAPI_unitTests(callback)
     }
     else 
     {
-      console.log(tests+" "+count);
-      test = tests[count];
+      console.log(testArr+" "+count);
+      var test = testArr[count];
       console.log("TEST IS: " + test);
       try
       {
         count++;
         console.log("running test" + test);
-        tests[test](run);
+        test(run);
         passed+=1;
 
       }
