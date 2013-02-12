@@ -150,7 +150,7 @@ User.unitTests = function TESTAPI_unitTests(callback)
   }
 
 
-  var run = function run (call)
+  var run = function run ()
   {
     if (count == length)
     {
