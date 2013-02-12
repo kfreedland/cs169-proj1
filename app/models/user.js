@@ -140,6 +140,16 @@ User.unitTests = function TESTAPI_unitTests(callback)
     length++;
   }
 
+  var call = function call()
+  {
+    if(failed == 0)
+    {
+      responseDict.output = "all good";
+    }
+    callback(responseDict);
+  }
+
+
   var run = function run (call)
   {
     if (count == length)
@@ -167,15 +177,7 @@ User.unitTests = function TESTAPI_unitTests(callback)
     }
   }
 
-  function call()
-  {
-    if(failed == 0)
-    {
-      responseDict.output = "all good";
-    }
-    callback(responseDict);
-  }
-
+  
   run(call);
 };
 
