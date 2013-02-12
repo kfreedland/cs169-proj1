@@ -150,6 +150,7 @@ for (var i = 0; i < 129; i++)
 tests = 
 {
     'addUserA' : function(funct)
+    {
         console.log("adding first user");
         User.add('aUser','aPassword', function (responseDict)
         {
