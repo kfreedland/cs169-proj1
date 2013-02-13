@@ -189,7 +189,7 @@ User.unitTests = function TESTAPI_unitTests(callback)
   }
 
   
-  run()
+  run();
 };
 
 User = geddy.model.register('User', User);
