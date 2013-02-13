@@ -229,7 +229,7 @@ tests =
                     {
                         //ERR_BAD_USERNAME
                         assert.deepEqual(responseDict, {'errCode': -3});
-                        funct("Passed addInvalidUname");
+                        funct();
                     });
                 });
             });
@@ -256,13 +256,13 @@ tests =
                     //ERR_BAD_PASSWORD
                     assert.deepEqual(responseDict, {'errCode': -4});
 
-                    console.log("long pword");
+                    console.log();
                     User.add('fail3', longPass, function(responseDict)
                     {
                         //ERR_BAD_PASSWORD
                         assert.deepEqual(responseDict, {'errCode': -4});
 
-                        funct("Passed addInvalidPword");
+                        funct();
                     });
                 });
             });
@@ -280,7 +280,7 @@ tests =
             User.resetFixture(function (responseDict)
             {
                 assert.deepEqual(responseDict, {'errCode': 1});
-                funct("Passed ResetFixture");
+                funct();
             });
         }
         catch (error)
@@ -307,7 +307,7 @@ tests =
                         User.resetFixture(function (responseDict)
                         {
                             assert.deepEqual(responseDict, {'errCode': 1});
-                            funct("passed login");
+                            funct();
                         });
                     });
                 });

@@ -158,7 +158,12 @@ User.unitTests = function TESTAPI_unitTests(callback)
   {
     if(result)
     {
+      failed+=1;
       responseDict.output+=(result+" ")
+    }
+    else
+    {
+      passed+=1;
     }
     if (count == length)
     {
@@ -171,7 +176,6 @@ User.unitTests = function TESTAPI_unitTests(callback)
       {
         count++;
         test(run);
-        passed+=1;
         console.log("PASSED");
 
       }
