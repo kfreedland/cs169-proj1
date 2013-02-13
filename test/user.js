@@ -116,7 +116,8 @@ tests = [
   function (callback) 
   {
     User.add('user6', null, function (responseDict) 
-        for (var key in responseDict)
+    {
+       for (var key in responseDict)
         {
             console.log(key + " : " + responseDict[key]);
         }
