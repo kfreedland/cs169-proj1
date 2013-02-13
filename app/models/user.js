@@ -44,7 +44,7 @@ User.someStaticProperty = 'YYZ';
 User.add = function add (uname, pword, callback)
 {
   var responseDict={};
-  if(!uname || uname == "" || uname.length > 128)
+  if(!uname || uname.length == 0 || uname.length > 128)
   {
     //ERR_BAD_USERNAME
     console.log("ERR_BAD_USERNAME: "+uname);
@@ -53,7 +53,7 @@ User.add = function add (uname, pword, callback)
   }
   else 
   {
-    if(!pword || pword == "" || pword > 128)
+    if(!pword || pword.length == 0 || pword > 128)
     {
       //ERR_BAD_PASSWORD
       responseDict.errCode = -4;
@@ -136,7 +136,7 @@ User.unitTests = function TESTAPI_unitTests(callback)
   var testArr = new Array();
   for (var i in tests)
   {
-    console.log("TEST: "test[i]);
+    console.log("TEST: "+test[i]);
     testArr[length] = tests[i]; 
     length++;
   }
