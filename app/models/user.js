@@ -177,7 +177,7 @@ User.unitTests = function TESTAPI_unitTests(callback)
         count++;
         test(run);
         console.log("PASSED");
-
+        passed+=1;
       }
       catch (e)
       {
