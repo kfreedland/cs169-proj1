@@ -158,6 +158,7 @@ User.unitTests = function TESTAPI_unitTests(callback)
 
     var runTests = function runTests(didTestPass)
     {
+      console.log("runningTest");
       if (currentTestNumber !== -1)
       {
         if (!didTestPass)
