@@ -130,7 +130,7 @@ User.unitTests = function TESTAPI_unitTests(callback)
   {
     var success = 0;
     var fail = 0;
-    var tests = require('../../test/users_model.js');
+    var tests = require('../../test/user.js');
     var failedTests = "";
 
     var numTests = 0;
