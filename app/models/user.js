@@ -53,7 +53,7 @@ User.add = function add (uname, pword, callback)
   }
   else 
   {
-    if(!pword || pword.length == 0 || pword > 128)
+    if(!pword || pword.length == 0 || pword.length > 128)
     {
       //ERR_BAD_PASSWORD
       responseDict.errCode = -4;
