@@ -210,85 +210,113 @@ tests =
 
     'addInvalidUName': function (funct)
     {
-        console.log("null Uname");
-        User.add(null, 'shouldnt matter', function (responseDict)
+        try
         {
-            //ERR_BAD_USERNAME
-            assert.deepEqual(responseDict, {'errCode': -3});
-
-            console.log("empty Uname");
-            User.add('','shouldnt matter', function (responseDict)
+            console.log("null Uname");
+            User.add(null, 'shouldnt matter', function (responseDict)
             {
                 //ERR_BAD_USERNAME
-                assert.deepEqual(responseDict, {'errCode':-3});
+                assert.deepEqual(responseDict, {'errCode': -3});
 
-                console.log("long Uname");
-                User.add(longUser, 'shouldnt matter', function (responseDict)
+                console.log("empty Uname");
+                User.add('','shouldnt matter', function (responseDict)
                 {
                     //ERR_BAD_USERNAME
-                    assert.deepEqual(responseDict, {'errCode': -3});
-                    funct();
+                    assert.deepEqual(responseDict, {'errCode':-3});
+
+                    console.log("long Uname");
+                    User.add(longUser, 'shouldnt matter', function (responseDict)
+                    {
+                        //ERR_BAD_USERNAME
+                        assert.deepEqual(responseDict, {'errCode': -3});
+                        funct("Passed addInvalidUname");
+                    });
                 });
             });
-        });
+        }
+        catch (error)
+        {
+            funct(error);
+        }
     },
 
     'addInvalidPword' : function (funct)
     {
-        console.log("null pword");
-        User.add('fail1', null, function (responseDict)
+        try
         {
-            //ERR_BAD_PASSWORD
-            assert.deepEqual(responseDict, {'errCode': -4});
-
-            console.log("empty pword");
-            User.add('fail2', '', function (responseDict)
+            console.log("null pword");
+            User.add('fail1', null, function (responseDict)
             {
                 //ERR_BAD_PASSWORD
                 assert.deepEqual(responseDict, {'errCode': -4});
 
-                console.log("long pword");
-                User.add('fail3', longPass, function(responseDict)
+                console.log("empty pword");
+                User.add('fail2', '', function (responseDict)
                 {
                     //ERR_BAD_PASSWORD
                     assert.deepEqual(responseDict, {'errCode': -4});
 
-                    funct();
+                    console.log("long pword");
+                    User.add('fail3', longPass, function(responseDict)
+                    {
+                        //ERR_BAD_PASSWORD
+                        assert.deepEqual(responseDict, {'errCode': -4});
+
+                        funct("Passed addInvalidPword");
+                    });
                 });
             });
-        });
+        }
+        catch (error)
+        {
+           funct(error); 
+        }
     },
 
     'resetFixture' : function (funct)
     {
-        User.resetFixture(function (responseDict)
+        try
         {
-            assert.deepEqual(responseDict, {'errCode': 1});
-            funct();
-        });
+            User.resetFixture(function (responseDict)
+            {
+                assert.deepEqual(responseDict, {'errCode': 1});
+                funct("Passed ResetFixture");
+            });
+        }
+        catch (error)
+        {
+         funct(error);
+        }
     },
 
     'login' : function (funct)
     {
-        User.login('me', '123', function (responseDict)
+        try
         {
-            assert.deepEqual(responseDict, {'errCode': -1});
-
-            User.add('me', '123', function (responseDict)
+            User.login('me', '123', function (responseDict)
             {
-                assert.deepEqual(responseDict, {'errCode': 1, 'count': 0});
-                User.login('me', '123', function (responseDict)
+                assert.deepEqual(responseDict, {'errCode': -1});
+
+                User.add('me', '123', function (responseDict)
                 {
-                    assert.deepEqual(responseDict, {'errCode': 1, 'count': 2});
-                    
-                    User.resetFixture(function (responseDict)
+                    assert.deepEqual(responseDict, {'errCode': 1, 'count': 0});
+                    User.login('me', '123', function (responseDict)
                     {
-                        assert.deepEqual(responseDict, {'errCode': 1});
-                        funct();
+                        assert.deepEqual(responseDict, {'errCode': 1, 'count': 2});
+                        
+                        User.resetFixture(function (responseDict)
+                        {
+                            assert.deepEqual(responseDict, {'errCode': 1});
+                            funct("passed login");
+                        });
                     });
                 });
             });
-        });
+        catch (error)
+        {
+            funct(error);
+        }
+
     }
 
 };

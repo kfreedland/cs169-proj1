@@ -146,7 +146,7 @@ User.unitTests = function TESTAPI_unitTests(callback)
   {
     if(failed == 0)
     {
-      responseDict.output = "all good";
+      responseDict.output += " all good ";
     }
     responseDict.totalTests = failed + passed;
     responseDict.nrFailed = failed;
@@ -154,8 +154,12 @@ User.unitTests = function TESTAPI_unitTests(callback)
   }
 
 
-  var run = function run ()
+  var run = function run (result)
   {
+    if(result)
+    {
+      responseDict.output+=(result+" ")
+    }
     if (count == length)
     {
       call();
@@ -181,7 +185,7 @@ User.unitTests = function TESTAPI_unitTests(callback)
   }
 
   
-  run(call);
+  run()
 };
 
 User = geddy.model.register('User', User);
