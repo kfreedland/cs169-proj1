@@ -149,64 +149,64 @@ for (var i = 0; i < 129; i++)
 
 tests = 
 {
-    'addUserA' : function(funct)
-    {
-        console.log("adding first user");
-        User.add('aUser','aPassword', function (responseDict)
-        {
-            //SUCCESS
-            assert.deepEqual(responseDict, {'errCode': 1, 'count': 1});
-            User.resetFixture(function (responseDict)
-            {
-                console.log("removing first user");
-                assert.deepEqual(responseDict, {'errCode': 1});
-                funct();
-            });
+    // 'addUserA' : function(funct)
+    // {
+    //     console.log("adding first user");
+    //     User.add('aUser','aPassword', function (responseDict)
+    //     {
+    //         //SUCCESS
+    //         assert.deepEqual(responseDict, {'errCode': 1, 'count': 1});
+    //         User.resetFixture(function (responseDict)
+    //         {
+    //             console.log("removing first user");
+    //             assert.deepEqual(responseDict, {'errCode': 1});
+    //             funct();
+    //         });
                
-        });
-    },
+    //     });
+    // },
 
-    'addUserAB': function (funct)
-    {
-        console.log("adding first user");
-        User.add('aUser','aPassword', function (responseDict)
-        {
-            //SUCCESS
-            assert.deepEqual(responseDict, {'errCode': 1, 'count': 1});
-            console.log("adding second user");
-            User.add('bUser','bPassword', function (responseDict)
-            {
-                //SUCCESS
-                assert.deepEqual(responseDict, {'errCode':1, 'count': 1});
+    // 'addUserAB': function (funct)
+    // {
+    //     console.log("adding first user");
+    //     User.add('aUser','aPassword', function (responseDict)
+    //     {
+    //         //SUCCESS
+    //         assert.deepEqual(responseDict, {'errCode': 1, 'count': 1});
+    //         console.log("adding second user");
+    //         User.add('bUser','bPassword', function (responseDict)
+    //         {
+    //             //SUCCESS
+    //             assert.deepEqual(responseDict, {'errCode':1, 'count': 1});
 
-                User.resetFixture(function (responseDict)
-                {
-                    console.log("removing first user");
-                    assert.deepEqual(responseDict, {'errCode': 1});
-                    funct();
-                });
-            });
-        });
-    },
+    //             User.resetFixture(function (responseDict)
+    //             {
+    //                 console.log("removing first user");
+    //                 assert.deepEqual(responseDict, {'errCode': 1});
+    //                 funct();
+    //             });
+    //         });
+    //     });
+    // },
 
-    'addExistingUser': function (funct)
-    {
-        User.add('cUser','cPassword', function (responseDict1)
-        {
-            User.add('cUser','cPassword', function (responseDict)
-            {
-                //ERR_USER_EXISTS
-                assert.deepEqual(responseDict, {'errCode':-2});
+    // 'addExistingUser': function (funct)
+    // {
+    //     User.add('cUser','cPassword', function (responseDict1)
+    //     {
+    //         User.add('cUser','cPassword', function (responseDict)
+    //         {
+    //             //ERR_USER_EXISTS
+    //             assert.deepEqual(responseDict, {'errCode':-2});
 
-                User.resetFixture(function (responseDict)
-                {
-                    console.log("removing first user");
-                    assert.deepEqual(responseDict, {'errCode': 1});
-                    funct();
-                });
-            });
-        });
-    },
+    //             User.resetFixture(function (responseDict)
+    //             {
+    //                 console.log("removing first user");
+    //                 assert.deepEqual(responseDict, {'errCode': 1});
+    //                 funct();
+    //             });
+    //         });
+    //     });
+    // },
 
     'addInvalidUName': function (funct)
     {
