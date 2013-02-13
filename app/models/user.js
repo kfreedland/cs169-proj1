@@ -183,6 +183,8 @@ User.unitTests = function TESTAPI_unitTests(callback)
           tests[currentTestNumber](runTests);
       }
     }
+
+    runTests();
   });
 }
 
