@@ -276,7 +276,7 @@ tests =
 
             User.add('me', '123', function (responseDict)
             {
-                assert.deepEqual(responseDict, {'errCode': 1});
+                assert.deepEqual(responseDict, {'errCode': 1, 'count': 0});
                 User.login('me', '123', function (responseDict)
                 {
                     assert.deepEqual(responseDict, {'errCode': 1, 'count': 2});

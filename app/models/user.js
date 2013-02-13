@@ -173,8 +173,7 @@ User.unitTests = function TESTAPI_unitTests(callback)
       }
       catch (e)
       {
-        responseDict.output+="Error: "+e+"\n"
-        console.log("EXCEPTION: "+ e);
+        console.log("ERROR");
         failed+=1;
       }
       call();
