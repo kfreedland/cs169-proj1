@@ -182,8 +182,8 @@ User.unitTests = function TESTAPI_unitTests(callback)
           tests[currentTestNumber](runTests);
       }
     }
-  }
-};
+  });
+}
 
 User = geddy.model.register('User', User);
 exports.User = User;
