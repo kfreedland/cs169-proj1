@@ -159,7 +159,7 @@ User.unitTests = function TESTAPI_unitTests(callback)
     if(result)
     {
       failed+=1;
-      responseDict.output+=(result+" ")
+      responseDict.output+=(result+" ");
     }
     else
     {
