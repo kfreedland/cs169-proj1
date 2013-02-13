@@ -136,9 +136,12 @@ User.unitTests = function TESTAPI_unitTests(callback)
   var testArr = new Array();
   for (var i in tests)
   {
+    console.log("TEST: "test[i]);
     testArr[length] = tests[i]; 
     length++;
   }
+
+  console.log("LENGTH IS "+length);
 
   var call = function call()
   {
