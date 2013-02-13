@@ -45,7 +45,7 @@ User.someStaticProperty = 'YYZ';
 User.add = function add (uname, pword, callback)
 {
   var responseDict={};
-  if(!uname || uname == "" || uname.length > 128)
+  if(!uname || uname.length == 0 || uname.length > 128)
   {
     //ERR_BAD_USERNAME
     console.log("ERR_BAD_USERNAME: "+uname);
@@ -54,7 +54,7 @@ User.add = function add (uname, pword, callback)
   }
   else 
   {
-    if(!pword || pword == "" || pword > 128)
+    if(!pword || pword.length == 0 || pword.length > 128)
     {
       //ERR_BAD_PASSWORD
       responseDict.errCode = -4;
@@ -127,58 +127,67 @@ User.resetFixture = function resetFixture (callback)
 
 User.unitTests = function TESTAPI_unitTests(callback)
 {
-  var responseDict = {};
-  var tests = require('../../test/user.js');
-  var failed = 0;
-  var passed = 0;
-  responseDict.output=""
-  var count = 0;
-  var length = 0;
-  var testArr = new Array();
-  for (var i in tests)
+  User.resetFixture(function (call)
   {
-    testArr[length] = tests[i]; 
-    length++;
-  }
+    var success = 0;
+    var fail = 0;
+    var tests = require('../../test/user.js');
+    var failedTests = "";
 
-  function run (call)
-  {
-    if (count == length)
+    var numTests = 0;
+    for (var key in tests)
     {
-      call();
+      numTests += 1;
     }
-    else 
+    var currentTestNumber = -1;
+
+    var finish = function finish()
     {
-      var test = testArr[count];
-      console.log("TESTING NEW TEST");
-      try
+      var responseDict = {};
+      responseDict.totalTests = success + fail;
+      responseDict.nrFailed = fail;
+      if (fail == 0)
       {
-        count++;
-        test(run);
-        passed+=1;
-
-      }
-      catch (e)
+        responseDict.output = "All good";
+      } 
+      else 
       {
-        responseDict.output+="Error: "+e+"\n"
-        console.log("EXCEPTION: "+ e);
-        failed+=1;
+        responseDict.output = failedTests;
       }
-      call();
-    }
-  }
+      callback(responseDict);
+    };
 
-  function call()
-  {
-    if(failed == 0)
+    var runTests = function runTests(didTestPass)
     {
-      responseDict.output = "all good";
+      console.log("runningTest");
+      if (currentTestNumber !== -1)
+      {
+        if (!didTestPass)
+        {
+          fail += 1;
+          failedTests += "Test " + currentTestNumber + ": FAILED.    ";
+        } 
+        else
+        {
+          success += 1;
+          console.log("Test " + currentTestNumber + ": PASSED.");
+        }
+      }
+      currentTestNumber += 1;
+      console.log("running test: " + currentTestNumber + " and there are :" + numTests + " total tests");
+      if (currentTestNumber >= numTests)
+      {
+        finish();
+      } 
+      else
+      {
+          tests[currentTestNumber](runTests);
+      }
     }
-    callback(responseDict);
-  }
 
-  run(call);
-};
+    runTests();
+  });
+}
 
 User = geddy.model.register('User', User);
 exports.User = User;}());
