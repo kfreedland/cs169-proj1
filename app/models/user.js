@@ -126,8 +126,8 @@ User.resetFixture = function resetFixture (callback)
 
 User.unitTests = function TESTAPI_unitTests(callback)
 {
-    User.resetFixture(function (call)
-    {
+  User.resetFixture(function (call)
+  {
     var success = 0;
     var fail = 0;
     var tests = require('../../test/users_model.js');
@@ -181,6 +181,8 @@ User.unitTests = function TESTAPI_unitTests(callback)
       {
           tests[currentTestNumber](runTests);
       }
+    }
+  }
 };
 
 User = geddy.model.register('User', User);
