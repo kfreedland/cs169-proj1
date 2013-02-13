@@ -184,5 +184,5 @@ tests = [
         }
     });
   }
-
+]
 module.exports = tests;
