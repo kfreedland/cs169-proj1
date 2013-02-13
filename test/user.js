@@ -220,7 +220,7 @@ tests =
             User.add('','shouldnt matter', function (responseDict)
             {
                 //ERR_BAD_USERNAME
-                assert.deepEqual(responseDict, {'errCode':--3});
+                assert.deepEqual(responseDict, {'errCode':-3});
 
                 console.log("long Uname");
                 User.add(longUser, 'shouldnt matter', function (responseDict)

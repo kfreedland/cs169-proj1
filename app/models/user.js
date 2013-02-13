@@ -136,7 +136,6 @@ User.unitTests = function TESTAPI_unitTests(callback)
   var testArr = new Array();
   for (var i in tests)
   {
-    console.log("TEST: "+tests[i]);
     testArr[length] = tests[i]; 
     length++;
   }
