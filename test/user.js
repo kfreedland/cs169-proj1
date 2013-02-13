@@ -76,6 +76,7 @@ tests = [
     {
         try
         {
+            console.log("HERE");
             assert.deepEqual(responseDict, {'errCode': -3});
             callback(true);
         }
@@ -87,9 +88,11 @@ tests = [
   },
   function (callback) 
   {
-    User.add('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz', 'pass', function (responseDict) {
+    User.add('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz', 'pass', function (responseDict) 
+    {
         try
         {
+            console.log("HERE1");
             assert.deepEqual(responseDict, {'errCode': -3});
             callback(true);
         }
@@ -117,10 +120,7 @@ tests = [
   {
     User.add('user6', null, function (responseDict) 
     {
-       for (var key in responseDict)
-        {
-            console.log(key + " : " + responseDict[key]);
-        }
+        console.log("HERE3");
         try
         {
             assert.deepEqual(responseDict, {"errCode": -4});
@@ -134,11 +134,9 @@ tests = [
   },
   function (callback) 
   {
-    User.add('user7', 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz', function (responseDict) {
-        for (var key in responseDict)
-        {
-            console.log(key + " : " + responseDict[key]);
-        }
+    console.log("HERE4");
+    User.add('user7', 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz', function (responseDict) 
+    {
         try
         {
             assert.deepEqual(responseDict, {"errCode": -4});
