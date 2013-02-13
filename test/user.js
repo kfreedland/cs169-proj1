@@ -307,6 +307,7 @@ tests =
                         User.resetFixture(function (responseDict)
                         {
                             assert.deepEqual(responseDict, {'errCode': 1});
+                            console.log("NO ERROR?");
                             funct();
                         });
                     });
@@ -315,6 +316,7 @@ tests =
         }
         catch (error)
         {
+            console.log("WE HAVE AN ERROR");
             funct(error);
         }
 
