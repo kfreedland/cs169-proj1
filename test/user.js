@@ -312,6 +312,7 @@ tests =
                     });
                 });
             });
+        }
         catch (error)
         {
             funct(error);
