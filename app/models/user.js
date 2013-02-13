@@ -126,70 +126,61 @@ User.resetFixture = function resetFixture (callback)
 
 User.unitTests = function TESTAPI_unitTests(callback)
 {
-  var responseDict = {};
-  var tests = require('../../test/user.js');
-  var failed = 0;
-  var passed = 0;
-  responseDict.output=""
-  var count = 0;
-  var length = 0;
-  var testArr = new Array();
-  for (var i in tests)
-  {
-    testArr[length] = tests[i]; 
-    length++;
-  }
+    User.resetFixture(function (call)
+    {
+    var success = 0;
+    var fail = 0;
+    var tests = require('../../test/users_model.js');
+    var failedTests = "";
 
-  console.log("LENGTH IS "+length);
+    var numTests = 0;
+    for (var key in tests)
+    {
+      numTests += 1;
+    }
+    var currentTestNumber = -1;
 
-  var call = function call()
-  {
-    if(failed == 0)
+    var finish = function finish()
     {
-      responseDict.output += " all good ";
-    }
-    responseDict.totalTests = failed + length;
-    responseDict.nrFailed = failed;
-    callback(responseDict);
-  }
-
-
-  var run = function run (result)
-  {
-    if(result)
-    {
-      failed+=1;
-      responseDict.output+=(result+" ");
-    }
-    else
-    {
-      passed+=1;
-    }
-    if (count == length)
-    {
-      call();
-    }
-    else 
-    {
-      var test = testArr[count];
-      try
+      var responseDict = {};
+      responseDict.totalTests = success + fail;
+      responseDict.nrFailed = fail;
+      if (fail == 0)
       {
-        count++;
-        test(run);
-        console.log("PASSED");
-        passed+=1;
-      }
-      catch (e)
+        responseDict.output = "All good";
+      } 
+      else 
       {
-        console.log("ERROR");
-        failed+=1;
+        responseDict.output = failedTests;
       }
-      call();
-    }
-  }
+      callback(responseDict);
+    };
 
-  
-  run();
+    var runTests = function runTests(didTestPass)
+    {
+      if (currentTestNumber !== -1)
+      {
+        if (!didTestPass)
+        {
+          fail += 1;
+          failedTests += "Test " + currentTestNumber + ": FAILED.    ";
+        } 
+        else
+        {
+          success += 1;
+          console.log("Test " + currentTestNumber + ": PASSED.");
+        }
+      }
+      currentTestNumber += 1;
+      console.log("running test: " + currentTestNumber + " and there are :" + numTests + " total tests");
+      if (currentTestNumber >= numTests)
+      {
+        finish();
+      } 
+      else
+      {
+          tests[currentTestNumber](runTests);
+      }
 };
 
 User = geddy.model.register('User', User);

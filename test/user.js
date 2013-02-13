@@ -10,201 +10,178 @@ for (var i = 0; i < 129; i++)
     longPass+="a";
 }
 
-tests = 
-{
-    'addUserA' : function(funct)
+tests = [
+  function (callback) {
+    User.add('user1', 'pass', function (responseDict) 
     {
         try
         {
-            console.log("adding first user");
-            User.add('aUser','aPassword', function (responseDict)
-            {
-                //SUCCESS
-                assert.deepEqual(responseDict, {'errCode': 1, 'count': 1});
-                User.resetFixture(function (responseDict)
-                {
-                    console.log("removing first user");
-                    assert.deepEqual(responseDict, {'errCode': 1});
-                    funct();
-                });
-                   
-            });
+            assert.deepEqual(responseDict, {'errCode': 1, 'count': 1});
+            callback(true);
         }
-        catch (error)
+        catch (exc) 
         {
-            funct(error);
+            callback(false);
         }
-    },
-
-    'addUserAB': function (funct)
+    });
+  },
+  function (callback) 
+  {
+    User.add('Bob', 'pass', function (responseDict) 
+    {
+        User.add('Bob', 'pass', function (responseDict) {
+            try
+            {
+                assert.deepEqual(responseDict, {'errCode': -2});
+                callback(true);
+            }
+            catch (exc)
+            {
+                callback(false);
+            }
+        });
+    });
+  },
+  function (callback) 
+  {
+    User.add('user2', 'pass', function (responseDict)
     {
         try
         {
-            console.log("adding first user");
-            User.add('aUser','aPassword', function (responseDict)
-            {
-                //SUCCESS
-                assert.deepEqual(responseDict, {'errCode': 1, 'count': 1});
-                console.log("adding second user");
-                User.add('bUser','bPassword', function (responseDict)
-                {
-                    //SUCCESS
-                    assert.deepEqual(responseDict, {'errCode':1, 'count': 1});
-
-                    User.resetFixture(function (responseDict)
-                    {
-                        console.log("removing first user");
-                        assert.deepEqual(responseDict, {'errCode': 1});
-                        funct();
-                    });
-                });
-            });
+            assert.deepEqual(responseDict, {'errCode': 1, 'count': 1});
+            callback(true);
         }
-        catch (error)
-        {
-            funct(error);
+        catch (exc){
+            callback(false);
         }
-    },
-
-    'addExistingUser': function (funct)
+    });
+  },
+  function (callback) 
+  {
+    User.add("", 'pass', function (responseDict) 
     {
         try{
-            User.add('cUser','cPassword', function (responseDict1)
-            {
-                User.add('cUser','cPassword', function (responseDict)
-                {
-                    //ERR_USER_EXISTS
-                    assert.deepEqual(responseDict, {'errCode':-2});
-
-                    User.resetFixture(function (responseDict)
-                    {
-                        console.log("removing first user");
-                        assert.deepEqual(responseDict, {'errCode': 1});
-                        funct();
-                    });
-                });
-            });
+            assert.deepEqual(responseDict, {'errCode': -3});
+            callback(true);
         }
-        catch (error)
+        catch (exc)
         {
-            funct(error);
+            callback(false);
         }
-    },
-
-    'addInvalidUName': function (funct)
+    });
+  },
+  function (callback) 
+  {
+    User.add(null, 'pass', function (responseDict) 
     {
         try
         {
-            console.log("null Uname");
-            User.add(null, 'shouldnt matter', function (responseDict)
-            {
-                //ERR_BAD_USERNAME
-                assert.deepEqual(responseDict, {'errCode': -3});
-
-                console.log("empty Uname");
-                User.add('','shouldnt matter', function (responseDict)
-                {
-                    //ERR_BAD_USERNAME
-                    assert.deepEqual(responseDict, {'errCode':-3});
-
-                    console.log("long Uname");
-                    User.add(longUser, 'shouldnt matter', function (responseDict)
-                    {
-                        //ERR_BAD_USERNAME
-                        assert.deepEqual(responseDict, {'errCode': -3});
-                        funct();
-                    });
-                });
-            });
+            assert.deepEqual(responseDict, {'errCode': -3});
+            callback(true);
         }
-        catch (error)
+        catch (exc)
         {
-            funct(error);
+            callback(false);
         }
-    },
-
-    'addInvalidPword' : function (funct)
+    });
+  },
+  function (callback) 
+  {
+    User.add('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz', 'pass', function (responseDict) {
+        try
+        {
+            assert.deepEqual(responseDict, {'errCode': -3});
+            callback(true);
+        }
+        catch (exc)
+        {
+            callback(false);
+        }
+    });
+  },
+  function (callback) 
+  {
+    User.add('user5', "", function (responseDict) 
+    {
+        try{
+            assert.deepEqual(responseDict, {"errCode": -4});
+            callback(true);
+        }
+        catch (exc)
+        {
+            callback(false);
+        }
+    });
+  },
+  function (callback) 
+  {
+    User.add('user6', null, function (responseDict) 
+        for (var key in responseDict)
+        {
+            console.log(key + " : " + responseDict[key]);
+        }
+        try
+        {
+            assert.deepEqual(responseDict, {"errCode": -4});
+            callback(true);
+        }
+        catch (exc)
+        {
+            callback(false);
+        }
+    });
+  },
+  function (callback) 
+  {
+    User.add('user7', 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz', function (responseDict) {
+        for (var key in responseDict)
+        {
+            console.log(key + " : " + responseDict[key]);
+        }
+        try
+        {
+            assert.deepEqual(responseDict, {"errCode": -4});
+            callback(true);
+        }
+        catch (exc)
+        {
+            callback(false);
+        }
+    });
+  },
+  function (callback) 
+  {
+    User.add('user', 'pass', function (responseDict) 
+    {
+          User.login('user', 'pass', function (responseDict) 
+          {
+            try
+            {
+                assert.deepEqual(responseDict, {'errCode': 1, 'count': 2});
+                callback(true);
+            }
+            catch (exc)
+            {
+                console.log("exception: " + exc);
+                callback(false);
+            }
+        });
+    });
+  },
+  function (callback) 
+  {
+    User.login('user12392', 'pass2', function (responseDict) 
     {
         try
         {
-            console.log("null pword");
-            User.add('fail1', null, function (responseDict)
-            {
-                //ERR_BAD_PASSWORD
-                assert.deepEqual(responseDict, {'errCode': -4});
-
-                console.log("empty pword");
-                User.add('fail2', '', function (responseDict)
-                {
-                    //ERR_BAD_PASSWORD
-                    assert.deepEqual(responseDict, {'errCode': -4});
-
-                    console.log();
-                    User.add('fail3', longPass, function(responseDict)
-                    {
-                        //ERR_BAD_PASSWORD
-                        assert.deepEqual(responseDict, {'errCode': -4});
-
-                        funct();
-                    });
-                });
-            });
+            assert.deepEqual(responseDict, {'errCode': -1});
+            callback(true);
         }
-        catch (error)
+        catch (exc)
         {
-           funct(error); 
+            callback(false);
         }
-    },
-
-    'resetFixture' : function (funct)
-    {
-        try
-        {
-            User.resetFixture(function (responseDict)
-            {
-                assert.deepEqual(responseDict, {'errCode': 1});
-                funct();
-            });
-        }
-        catch (error)
-        {
-         funct(error);
-        }
-    },
-
-    'login' : function (funct)
-    {
-        try
-        {
-            User.login('me', '123', function (responseDict)
-            {
-                assert.deepEqual(responseDict, {'errCode': -1});
-
-                User.add('me', '123', function (responseDict)
-                {
-                    assert.deepEqual(responseDict, {'errCode': 1, 'count': 1});
-                    User.login('me', '123', function (responseDict)
-                    {
-                        assert.deepEqual(responseDict, {'errCode': 1, 'count': 2});
-                        
-                        User.resetFixture(function (responseDict)
-                        {
-                            assert.deepEqual(responseDict, {'errCode': 1});
-                            console.log("NO ERROR?");
-                            funct();
-                        });
-                    });
-                });
-            });
-        }
-        catch (error)
-        {
-            console.log("WE HAVE AN ERROR");
-            funct(error);
-        }
-
-    }
-
-};
+    });
+  }
 
 module.exports = tests;
