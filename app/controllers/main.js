@@ -23,15 +23,15 @@ var Main = function () {
     , template: 'app/views/main/index'
     });
   };
-  
-  this.add = function(req, resp, params)
-  {
-  	this.respond(params,{
-  		format:'html'
-  		template: 'app/views/main/add'
-  	});
-  	})
-  };
+
+    this.add = function(req, resp, params)
+    {
+        this.respond(params,
+        {
+            format:'html'
+            template: 'app/views/main/add'
+        });
+    }; 
 };
 
 exports.Main = Main;
