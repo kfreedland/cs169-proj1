@@ -32,9 +32,9 @@ var Main = function () {
             template: 'app/views/main/add'
         });
 
-        for (var key in resp)
+        for (var key in params)
         {
-            console.log("RESP KEY IS "+key+" AND VAL IS "+resp[key]);
+            console.log("PARAMS KEY IS "+key+" AND VAL IS "+params[key]);
         }
     }; 
 
