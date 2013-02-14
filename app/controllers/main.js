@@ -28,7 +28,7 @@ var Main = function () {
     {
         this.respond(params,
         {
-            format:'html'
+            format:'html',
             template: 'app/views/main/add'
         });
     }; 
