@@ -31,7 +31,21 @@ var Main = function () {
             format:'html',
             template: 'app/views/main/add'
         });
+
+        for (var key in resp)
+        {
+            console.log("RESP KEY IS "+key+" AND VAL IS "+resp[key]);
+        }
     }; 
+
+    this.login = function(req, resp, params)
+    {
+        this.respond(params,
+        {
+            format:'html',
+            template: 'app/views/main/login'
+        });
+    };
 };
 
 exports.Main = Main;
