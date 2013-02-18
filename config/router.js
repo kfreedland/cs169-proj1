@@ -19,32 +19,11 @@
 
 var router = new geddy.RegExpRouter();
 
-router.get('/').to('Main.index');
-router.get('/users/add').to('Main.add');
-router.get('/users/login').to('Main.login');
+router.get('/').to('Main.split');
 router.post('/users/add').to('users.add');
 router.post('/TESTAPI/unitTests').to('users.unitTests');
 router.post('/TESTAPI/resetFixture').to('users.resetFixture');
 router.post('/users/login').to('users.login');
-
-// Basic routes
-// router.match('/moving/pictures/:id', 'GET').to('Moving.pictures');
-//
-// router.match('/farewells/:farewelltype/kings/:kingid', 'GET').to('Farewells.kings');
-//
-// Can also match specific HTTP methods only
-// router.get('/xandadu').to('Xanadu.specialHandler');
-// router.del('/xandadu/:id').to('Xanadu.killItWithFire');
-//
-// Resource-based routes
-// router.resource('hemispheres');
-//
-// Nested Resource-based routes
-// router.resource('hemispheres', function(){
-//   this.resource('countries');
-//   this.get('/print(.:format)').to('Hemispheres.print');
-// });
-
-router.match('/logins').to({controller: 'Logins', action: 'index'});
+router.post('/users/split').to('Users.split');
 router.resource('users');
 exports.router = router;

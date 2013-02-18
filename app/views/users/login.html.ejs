@@ -1,0 +1,37 @@
+<html>
+	<div class="hero-unit">
+	  <form id="login-form" class="form-horizontal" action="/users/login" method="POST">
+	    <fieldset>
+	      <legend>Login</legend>
+	      <% if(params.errors) { %>
+	      <div class="control-group">
+	        <ul>
+	        <% for(var err in params.errors) { %>
+	          <li><%= params.errors[err]; %></li>
+	        <% } %>
+	        </ul>
+	      </div>
+	      <% } %>
+	      <% if (data) { %>
+	      	<ul>
+	      	<% for(var item in data) { %>
+	          		<li><%= "KEY: "+item+" VALUE " +data[item] ; %></li>
+	        <% } %>
+    	  	<ul>
+	      	<p> errCode is <%= data.errCode %> </p>
+	      <% } %>
+	      <% if(data && data.errCode == 1) { %>
+	      	<p> you have loged in this many times %>
+	      		<%= data.count%>
+	      	</p>
+	      <% } else { %>
+	      	<%- partial('form', {user: {}}) %>
+
+	      	<div class="form-actions">
+	        	<%- contentTag('input', 'Login', {type: 'submit', class: 'btn btn-primary'}) %>
+	      	</div>
+	      <% } %>
+	    </fieldset>
+	  </form>
+	</div>
+</html>

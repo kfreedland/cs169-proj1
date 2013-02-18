@@ -1,13 +1,8 @@
 <html>
-	<p>Welcome existing user</p>
-	<% if (params.errCode == 1) { %>
-		<%= params.count; %>
-	<% } %>
-	
-	<form name="login" action="/users/login/" method="POST">
+	<p>Welcome existing user please enter your credentials</p>
+	<form name="add" action="/users/login/" method="POST">
 		Username: <input type="text" name="user">
 		Password: <input type="text" name="password">
 		<input type="submit" value="Submit">
 	</form>
-
 </html>

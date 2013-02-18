@@ -17,6 +17,7 @@
 */
 
 var Main = function () {
+    this.respondsWith = ['json', 'html', 'xml', 'js', 'txt'];
   this.index = function (req, resp, params) {
     this.respond(params, {
       format: 'html'
@@ -24,28 +25,14 @@ var Main = function () {
     });
   };
 
-    this.add = function(req, resp, params)
+    this.split = function(req, resp, params)
     {
         this.respond(params,
         {
             format:'html',
-            template: 'app/views/main/add'
+            template: 'app/views/users/split'
         });
-
-        for (var key in params)
-        {
-            console.log("PARAMS KEY IS "+key+" AND VAL IS "+params[key]);
-        }
     }; 
-
-    this.login = function(req, resp, params)
-    {
-        this.respond(params,
-        {
-            format:'html',
-            template: 'app/views/main/login'
-        });
-    };
 };
 
 exports.Main = Main;

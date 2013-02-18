@@ -1,0 +1,50 @@
+<html>
+  <div class="hero-unit">
+    <% if(params.respDict && params.respDict.errCode && params.respDict.errCode == 1 && params.respDict.count){ %>
+      <form id="logged-in" class="form-horizontal" action="/" method="GET">
+        <p> Welcome <%= params.user; %> </p>
+        <p> You have logged in <%= params.respDict.count; %> times. </p>
+        <input type='submit' name="logout" value="Logout">
+      </form>
+    <% } else { %>
+      <form id="user-form" class="form-horizontal" action="/users/split" method="POST">
+        <fieldset>
+          <% var msg = ""; %>
+          <% if(params.respDict && params.respDict.errCode && params.respDict.errCode != 1) { %>
+            <% var code = params.respDict.errCode; %>
+            <% if(code == -1) { %>
+              <% msg = "ERR_BAD_CREDENTIALS"; %>
+            <% } %>
+            <% if(code == -2) { %>
+              <% msg = "ERR_USER_EXISTS"; %>
+            <% } %>
+            <% if(code == -3) { %>
+              <% msg = "ERR_BAD_USERNAME"; %>
+            <% } %>
+            <% if(code == -4) { %>
+              <% msg = "ERR_BAD_PASSWORD"; %>
+            <% } %>
+          <% } %>
+          <legend>
+            <font color="red"> <%= msg; %> </font>
+          </legend>
+          <% if(params.errors) { %>
+          <div class="control-group">
+            <ul>
+            <% for(var err in params.errors) { %>
+              <li><%= params.errors[err]; %></li>
+            <% } %>
+            </ul>
+          </div>
+          <% } %>
+          <%- partial('form', {user: {}}) %>
+
+          <div class="form-actions">
+            <%- contentTag('input', 'Login', {type: 'submit', value: 'Login', name: 'split'}) %>
+            <%- contentTag('input', 'Add User', {type: 'submit', value: 'Add User', name: 'split'}) %>
+          </div>
+        </fieldset>
+      </form>
+    <% } %>
+  </div>
+</html>

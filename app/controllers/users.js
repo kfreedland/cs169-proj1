@@ -1,5 +1,52 @@
 var Users = function () {
-  this.respondsWith = ['json'];
+    this.respondsWith = ['json', 'html', 'xml', 'js', 'txt'];
+
+    this.splitGET = function(req, resp, params)
+    {
+      console.log("welcome to splitGet");
+        if(params.respDict)
+        {
+          params.respDict={};
+        }
+
+        this.respond(params,
+        {
+            format:'html',
+            template: 'app/views/users/split'
+        });
+    }; 
+
+    this.loginGET = function(req, resp, params)
+    {
+        this.respond(params,
+        {
+            format:'html',
+            template: 'app/views/users/login'
+        });
+    };
+
+
+  this.split = function (req, resp, params)
+  {
+    for (var key in params)
+    {
+      console.log(key+" "+params[key]);
+    }
+
+    if(params.split == "Add User")
+    {
+      console.log("add user funct");
+      this.add(req, resp, params)
+    }
+    else
+    {
+      if(params.split == "Login")
+      {
+        console.log("login user funct");
+        this.login(req, resp, params)
+      }
+    }
+  }
 
   this.index = function (req, resp, params) {
     var self = this;
@@ -12,26 +59,22 @@ var Users = function () {
   this.login = function (req, resp, params)
   {
     var self = this;
+    console.log("USER "+params.user+" PASSWORD "+params.password);
     geddy.model.User.login(params.user, params.password, function(responseDict)
     {
-      self.respond(responseDict);
+      console.log("ERRCODE is :" + responseDict.errCode);
+      params.respDict = responseDict;
+      self.respond(responseDict, {format: 'html'});
     });
   }
 
   this.add = function (req, resp, params) {
     var self = this;
     params.id = params.id || geddy.string.uuid(10);
-    console.log("params: "+params);
     geddy.model.User.add(params.user, params.password, function(responseDict)
-    {
-      if(responseDict)
-      {  
-        self.respond(responseDict);
-      }
-      else
-      {
-        self.respond("THIS IS BAD");
-      }
+    { 
+        params.respDict = responseDict;
+        self.respond(responseDict, {format: 'html'});
     });
   };
 
