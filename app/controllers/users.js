@@ -19,10 +19,11 @@ var Users = function () {
 
     this.loginGET = function(req, resp, params)
     {
-        this.respond(params,
+      var self = this;
+        self.respond(params,
         {
             format:'html',
-            template: 'app/views/users/login'
+            template: 'app/views/users/userForm'
         });
     };
 
@@ -68,18 +69,19 @@ var Users = function () {
     {
       console.log("ERRCODE is :" + responseDict.errCode);
       params.respDict = responseDict;
-      self.respond(responseDict, {format: 'html'});
+      self.respond(responseDict, {format: 'json'});
     });
   }
 
-  this.add = function (req, resp, params) {
+  this.add = function (req, resp, params) 
+  {
     //note how the responseDict is added to the params which enables the view to have access to them.  The format is html since we are sending this data to the view.
     var self = this;
     params.id = params.id || geddy.string.uuid(10);
     geddy.model.User.add(params.user, params.password, function(responseDict)
     { 
         params.respDict = responseDict;
-        self.respond(responseDict, {format: 'html'});
+        self.respond(responseDict, {format: 'json'});
     });
   };
 

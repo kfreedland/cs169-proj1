@@ -19,7 +19,7 @@
 
 var router = new geddy.RegExpRouter();
 
-router.get('/').to('Main.split');
+router.get('/').to('Users.loginGET');
 router.post('/users/add').to('users.add');
 router.post('/TESTAPI/unitTests').to('users.unitTests');
 router.post('/TESTAPI/resetFixture').to('users.resetFixture');

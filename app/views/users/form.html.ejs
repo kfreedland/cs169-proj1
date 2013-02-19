@@ -1,12 +1,12 @@
 <div class="control-group">
-  <label for="name" class="control-label">name</label>
+  <label for="user" class="control-label">Uernname</label>
   <div class="controls">
-    <%- contentTag('input', user.name, {type:'text', class:'span6', name:'user'}) %>
+    <%- contentTag('input', usersModel.user, {type:'text', class:'span6', name:'user', id:'userInput'}) %>
   </div>
 </div>
 <div class="control-group">
-  <label for="password" class="control-label">password</label>
+  <label for="password" class="control-label">Password</label>
   <div class="controls">
-    <%- contentTag('input', user.password, {type:'password', class:'span6', name:'password'}) %>
+    <%- contentTag('input', '', {type:'password', class:'span6', name:'password', id:'passwordInput'}) %>
   </div>
 </div>

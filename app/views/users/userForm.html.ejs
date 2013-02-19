@@ -1,0 +1,154 @@
+<html>
+  <body>  
+    <div class="hero-unit">
+      <div id="welcomeContainer" class="hidden2" >
+        <div id="welcomeMessage">
+        </div>
+        <form id="logout-form" class="form-horizontal" action="/" method="GET">
+          <a href="javascript:{}" onclick="document.getElementById('logout-form').submit();" data-role="button" data-theme="b" data-transition="slide" >
+            Logout
+            <input class="hidden"> </input>
+          </a>
+        </form>
+      </div>
+      <div id='loginForm'>
+        <legend>Login</legend>
+        <div class='hidden2 warning' id='firstE' >
+            <p> 
+              Incorrect Username or Password. 
+            </p>
+        </div>
+        <div class='hidden2 warning' id='secondE' >
+            <p> 
+              A user with that username already exists.
+            </p>
+        </div>
+        <div class='hidden2 warning' id='thirdE' >
+          <p> 
+            Invalid Username.
+          </p>
+        </div>
+        <div class='hidden2 warning' id='fourthE' >
+          <p> 
+            Invalid Password.
+          </p>
+        </div>
+    
+        <fieldset>
+          <%- partial('form', {usersModel: {}}) %>
+
+          <div class="button-container">
+            <a href="#" onclick="loginClicked();" data-role="button" data-transition="slide" class='f_left' >
+              Login
+              <input id='loginInput' name='loginInput' class='hidden' type='checkbox' > </input>
+            </a>
+            <a href="#" onclick="addClicked();" data-role="button" data-transition="slide" class='f_right' >
+              Add
+              <input id='addInput' name='addInput' class='hidden' type='checkbox' > </input>
+            </a>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      function check()
+      {
+        document.getElementById("check1").checked=true;
+      }
+      function uncheck()
+      {
+        document.getElementById("check1").checked=false;
+      }
+      $(document).ready(function (response) 
+      {
+        $('#loginInput').checked = false;
+        $('#addInput').checked = false;
+        $('.hidden2').hide();
+
+      });
+
+
+      function handle_login_response(data, user) 
+      {
+        if (data.errCode)
+        {
+          if (data.errCode == 1)
+          {
+            //SUCCESS
+            $('.warning').hide();
+            $('#loginForm').hide();
+            $('#welcomeContainer').show();
+            var welcomeHtml = '<p> Welcome: ' + user + '</p>' + '<p> You have logged in ' + data.count + ' times. </p>';
+            $('#welcomeMessage').html(welcomeHtml);
+          } 
+          else if (data.errCode == -1)
+          {
+            //invalid username password
+            $('.warning').hide();
+            $('#firstE').show();
+          } 
+        } 
+      }
+
+      var loginClicked = function () 
+      {
+        console.log('loginClicked');
+        var user = $('#userInput').val();
+        var password = $('#passwordInput').val();
+        $.post('/users/login', {user: user, password: password}, 
+          function(response)
+          { 
+            console.log("handle_login_response");
+            handle_login_response(response, user);
+        }, 'json');
+      };
+
+      function handle_add_user_response(data, user) 
+      {
+        if (data.errCode)
+        {
+          if (data.errCode == 1)
+          {
+            //SUCCESS
+            $('.warning').hide();
+            $('#loginForm').hide();
+            $('#welcomeContainer').show();
+            var welcomeHtml = '<p> Welcome: ' + user + '</p>' + '<p> You have logged in ' + data.count + ' times. </p>';
+            $('#welcomeMessage').html(welcomeHtml);
+          } 
+          else if (data.errCode == -2)
+          {
+            //User exists
+            $('.warning').hide();
+            $('#secondE').show();
+          } 
+          else if (data.errCode == -3)
+          {
+            //Bad username
+            $('.warning').hide();
+            $('#thirdE').show();
+          } else if (data.errCode == -4)
+          {
+            //Bad password
+            $('.warning').hide();
+            $('#fourthE').show();
+          }
+        }
+      }
+
+      var addClicked = function () 
+      {
+        console.log('addClicked');
+        var user = $('#userInput').val();
+        var password = $('#passwordInput').val();
+        $.post('/users/add', {user: user, password: password}, 
+        function(response)
+        { 
+          console.log("calling handle_add_user_response");
+          handle_add_user_response(response, user);
+        }, 'json');
+      };
+    </script>
+  </body>
+</html>
