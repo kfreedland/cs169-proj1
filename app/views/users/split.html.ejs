@@ -1,3 +1,5 @@
+
+<!-- This file is the UI for both adding and logging in users.  Split takes both name and password and passes them to the backend controller called split which then decodes if the user clicked login or adduser by looking at the params.  To follow this logic look at user.split-->
 <html>
   <div class="hero-unit">
     <% if(params.respDict && params.respDict.errCode && params.respDict.errCode == 1 && params.respDict.count){ %>

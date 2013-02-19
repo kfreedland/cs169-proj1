@@ -3,6 +3,7 @@ var Users = function () {
 
     this.splitGET = function(req, resp, params)
     {
+      //on logout this basically resets the params to not include responseDict data
       console.log("welcome to splitGet");
         if(params.respDict)
         {
@@ -28,6 +29,7 @@ var Users = function () {
 
   this.split = function (req, resp, params)
   {
+    //this decodes what the params are and splits it to either the add or login function note that split get is called on logout.
     for (var key in params)
     {
       console.log(key+" "+params[key]);
@@ -58,6 +60,8 @@ var Users = function () {
 
   this.login = function (req, resp, params)
   {
+    //note how the responseDict is added to the params which enables the view to have access to them.  The format is html since we are sending this data to the view.
+
     var self = this;
     console.log("USER "+params.user+" PASSWORD "+params.password);
     geddy.model.User.login(params.user, params.password, function(responseDict)
@@ -69,6 +73,7 @@ var Users = function () {
   }
 
   this.add = function (req, resp, params) {
+    //note how the responseDict is added to the params which enables the view to have access to them.  The format is html since we are sending this data to the view.
     var self = this;
     params.id = params.id || geddy.string.uuid(10);
     geddy.model.User.add(params.user, params.password, function(responseDict)

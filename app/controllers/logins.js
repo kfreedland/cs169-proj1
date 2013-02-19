@@ -8,4 +8,3 @@ var Logins = function () {
 };
 
 exports.Logins = Logins;
-
