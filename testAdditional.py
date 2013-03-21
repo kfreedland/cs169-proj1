@@ -19,7 +19,7 @@ class testAdditional(testLib.RestTestCase):
         self.assertResponse(respData2, errCode = testLib.RestTestCase.ERR_USER_EXISTS)
 
     def testAddBadUname(self):
-      respData = self.makeRequest("/users/add", method="POST", data = { 'user' : '', 'password' : 'password'} )
+        respData = self.makeRequest("/users/add", method="POST", data = { 'user' : '', 'password' : 'password'} )
     	self.assertResponse(respData, errCode = testLib.RestTestCase.ERR_BAD_USERNAME)
     	respData = self.makeRequest("/users/add", method="POST", data = { 'user' : None, 'password' : 'password'} )
     	self.assertResponse(respData, errCode = testLib.RestTestCase.ERR_BAD_USERNAME)
